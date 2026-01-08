@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.acme.dto.ProdutoRequest;
 import org.acme.entity.Produto;
 import org.acme.service.ProdutoService;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/produto")
 public class ProdutoResource {
@@ -39,8 +43,14 @@ public class ProdutoResource {
     @Path("/listAll")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Produto> listAll(){
-        List<Produto> listaProdutos = service.listAll();
-        return listaProdutos;
+        return service.listAll();
+    }
+
+
+    @POST
+    public Response criar(@Valid ProdutoRequest request){
+        System.out.println(request.toString());
+       return Response.status(Response.Status.CREATED).entity(request).build();
     }
 
     
