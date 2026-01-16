@@ -19,5 +19,20 @@ public class ProdutoService {
     List<Produto> listaProdutos = new ArrayList<>();
     return listaProdutos;
     }
+
+    public void salvarProduto(){
+    }
+
+    public void consultarPorId(){
+
+    }
+
+    public void atualizarProduto(){
+
+    }
+
+    public void excluirProduto(){
+
+    }
     
 }
