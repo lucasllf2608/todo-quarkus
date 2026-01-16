@@ -20,8 +20,6 @@ import jakarta.ws.rs.core.Response;
 @Path("/produtos")
 public class ProdutoResource {
 
-    private final Random random = new Random();
-
     @Inject
     private ProdutoService service;
 
