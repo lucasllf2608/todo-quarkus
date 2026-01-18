@@ -31,7 +31,7 @@ public class ProdutoResource {
 
  
     @GET 
-    @Path("/listAll")
+    @Path("/listall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Produto> listAll(){
         return service.listAll();
@@ -39,16 +39,17 @@ public class ProdutoResource {
 
 
     @POST
-    public Response salvar(@Valid ProdutoRequest request){
+    public Response salvarProduto(@Valid ProdutoRequest request){
         System.out.println(request.toString());
-       return Response.status(Response.Status.CREATED).entity(request).build();
+        Produto p = service.salvarProduto(request);    
+        return Response.status(Response.Status.CREATED).entity(p).build();
     }
 
-
-    public void salvarProduto(){
-    }
-
-    public void consultarPorId(){
+    
+    @GET 
+    @Path("/consultarPorId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void consultarPorId(Long id){
 
     }
 

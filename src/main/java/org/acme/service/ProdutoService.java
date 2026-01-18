@@ -9,19 +9,39 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
+import org.acme.dto.ProdutoRequest;
 import org.acme.entity.Produto;
+import org.acme.repository.ProdutoRepository;
 
 
 @ApplicationScoped
 public class ProdutoService {
 
+    @Inject
+    ProdutoRepository repository;
+
     public List<Produto> listAll(){
-    List<Produto> listaProdutos = new ArrayList<>();
+    List<Produto> listaProdutos = repository.listAll();
     return listaProdutos;
     }
 
-    public void salvarProduto(){
+    @Transactional
+    public Produto salvarProduto(ProdutoRequest request){
+        
+        Produto produto = new Produto();
+        
+        produto.nome = request.nome();
+        produto.descricao = request.descricao();
+        produto.preco = request.preco();
+        produto.estoque = request.estoque();
+
+        repository.persist(produto);
+
+        return produto;
+
     }
+
+
 
     public void consultarPorId(){
 
