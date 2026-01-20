@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.acme.dto.ProdutoRequest;
 import org.acme.entity.Produto;
@@ -41,11 +42,9 @@ public class ProdutoService {
 
     }
 
-
-
-    public void consultarPorId(){
-
-    }
+   public Optional<Produto> consultarPorId(Long id) {
+    return repository.findByIdOptional(id);
+    }   
 
     public void atualizarProduto(){
 

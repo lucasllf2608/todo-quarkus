@@ -1,8 +1,6 @@
 package org.acme.resources;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.acme.dto.ProdutoRequest;
 import org.acme.entity.Produto;
@@ -13,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -40,17 +39,18 @@ public class ProdutoResource {
 
     @POST
     public Response salvarProduto(@Valid ProdutoRequest request){
-        System.out.println(request.toString());
         Produto p = service.salvarProduto(request);    
         return Response.status(Response.Status.CREATED).entity(p).build();
     }
 
-    
-    @GET 
-    @Path("/consultarPorId")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void consultarPorId(Long id){
 
+    @GET
+    @Path("/{id}") 
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarPorId(@PathParam("id") Long id) {
+            return service.consultarPorId(id)
+            .map(produto -> Response.ok(produto).build()) 
+            .orElse(Response.status(Response.Status.NOT_FOUND).build()); 
     }
 
     public void atualizarProduto(){
