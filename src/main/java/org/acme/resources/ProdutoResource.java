@@ -28,14 +28,12 @@ public class ProdutoResource {
         return "Hello Produto";
     }
 
- 
     @GET 
     @Path("/listall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Produto> listAll(){
         return service.listAll();
     }
-
 
     @POST
     public Response salvarProduto(@Valid ProdutoRequest request){
